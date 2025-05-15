@@ -1,36 +1,46 @@
 import { FaShoppingCart, FaTrash } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-
+import { useTranslation } from "react-i18next";
 function Navbar() {
-  const { totalAmount, cart, dispatch } = useGlobalContext();
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+  const { totalAmount, cart, dispatch } = useGlobalContext(); 
   return (
     <header>
       <div className="container">
         <h2>
-          <Link to="/">ContextStore</Link>
+          <Link to="/">Mini Store App</Link>
         </h2>
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+          <div className="lang-btns">
+            <a href="#" onClick={() => changeLanguage("uz")}>
+              uz
+            </a>
+            <a href="#" onClick={() => changeLanguage("en")}>
+              en
+            </a>
+            <a href="#" onClick={() => changeLanguage("ru")}>
+              pу
+            </a>
+          </div>
           <div className="header__card">
             <span className="header__card__indicator">{totalAmount}</span>
             <FaShoppingCart />
             <div className="hidden-card">
               {cart.length > 0 ? (
                 cart.map((item) => {
-                  const { id, title, price, amount, image } = item;
+                  const { id, name, price, amount } = item;
+        
                   return (
                     <div key={id} className="hidden-card__item">
-                      <img
-                        src={image}
-                        alt={title}
-                        width={30}
-                        className="hidden-card__item-img"
-                      />
                       <div className="hidden-card__item-info">
-                        <h4 className="hidden-card__title">{title}</h4>
-                        <h3 className="hidden-card__price">Price: ${price}</h3>
+                        <h2 className="hidden-card__title">{name}</h2>
+                        <h3 className="hidden-card__price">
+                          {t("price-btn")}: ${price}
+                        </h3>
                         <p className="hidden-card__price ">
                           {amount}x ${price * amount}
                         </p>
@@ -47,7 +57,7 @@ function Navbar() {
                   );
                 })
               ) : (
-                <p className="hidden__card__info">Cart is empty</p>
+                <p className="hidden__card__info">{t("empty")}</p>
               )}
               {cart.length > 0 && (
                 <div className="hidden-card__card-footer">
@@ -55,7 +65,7 @@ function Navbar() {
                     onClick={() => dispatch({ type: "CLEAR" })}
                     className="hidden-card__clear-btn"
                   >
-                    Clear Cart
+                    {t("clear-btn")}
                   </button>
                 </div>
               )}

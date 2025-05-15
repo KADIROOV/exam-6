@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./Layouts/MainLayout";
 import Home from "./Pages/Home";
-import Contact from "./Pages/Contact";
 
 function App() {
   const routes = createBrowserRouter([
@@ -12,10 +11,6 @@ function App() {
         {
           index: true,
           element: <Home />,
-        },
-        {
-          path: "/contact",
-          element: <Contact />,
         },
       ],
     },
