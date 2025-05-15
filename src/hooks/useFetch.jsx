@@ -18,7 +18,6 @@ export function useFetch(url) {
         setIsPending(false);
       } catch (err) {
         setError(err.message);
-        console.log(err.message);
         setIsPending(false);
       }
     };
