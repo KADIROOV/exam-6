@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/*@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*/
 @import "tw-animate-css";
 
 *,
@@ -17,7 +18,7 @@ html {
 }
 
 body {
-  background: #f2f2f2;
+  background-color: #0f0c29; /* Gradientga mos to‘q fon */
   font-family: "Poppins", sans-serif;
   height: 100%;
 }
@@ -70,7 +71,7 @@ header .container {
   align-items: center;
   padding: 15px 20px;
   border-radius: 12px;
-  background-color: #e89300;
+  background-color: #fff;
   border: 2px solid black;
 }
 
@@ -99,9 +100,9 @@ header nav {
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #ffa516 94%, #0000) top/8px 8px
+  background: radial-gradient(farthest-side, #ff16f3 94%, #0000) top/8px 8px
       no-repeat,
-    conic-gradient(#0000 30%, #ffa516);
+    conic-gradient(#e864e1 30%, #ff16f3);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
   animation: l13 1s infinite linear;
 }
@@ -143,24 +144,32 @@ header nav {
 }
 
 .card {
-  background-color: #e89300;
-  border: 1px solid #ccc;
+  background: linear-gradient(
+    145deg,
+    #1c1a2e,
+    #2b2645
+  ); /* Yorqin chuqurlik effekti */
+  border: 1px solid #3c2c7d; /* Binafsharang hoshiyasi */
   border-radius: 10px;
   padding: 10px;
   box-sizing: border-box;
   width: 270px;
   height: 190px;
   position: relative;
+  box-shadow: 0 5px 15px rgba(140, 92, 255, 0.2);
+  color: #ffffff;
 }
 
 .card__info {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: #d4c2ff; /* Yumshoq binafsha rang */
 }
 
 .card__title {
-  color: #fcfcfc;
+  color: #ffffff; /* Oppoq sarlavha */
+  font-weight: 600;
 }
 
 .card_des {
@@ -176,15 +185,15 @@ header nav {
 }
 
 .card__price {
-  color: #ffff;
+  color: #ff79c6; /* Yorqin pushti - e’tiborni tortadi */
   position: absolute;
-  bottom: 5px;
-  left: 10px;
+  top: 2px;
+  right: 10px;
   letter-spacing: 1px;
 }
 
 .card__btn {
-  background-color: #e89300;
+  background-color: #620e89;
   display: flex;
   border: 1px solid #ffffff;
   gap: 3px;
@@ -196,16 +205,16 @@ header nav {
 }
 
 .card__btn .icon {
-  color: #000000;
+  color: #ffffff;
   transition: all 0.3s;
 }
 
 .card__btn:hover .icon {
-  color: #ffffff;
+  color: #911ab1;
 }
 
 .card__btn:hover {
-  background-color: #e89300;
+  background-color: #e2e2e0;
   border: 1.5px solid white;
   color: #ffffff;
 }
@@ -217,6 +226,7 @@ header nav {
   position: absolute;
   right: 5px;
   bottom: 5px;
+  color: #c262dc;
 }
 
 .card__btn__amount {
@@ -231,7 +241,7 @@ header nav {
 
 .card__btn__amount:hover {
   background-color: #ffff;
-  color: #e89300;
+  color: #fff;
 }
 
 .pagination {
@@ -265,7 +275,7 @@ header nav {
   font-size: 15px;
   right: -5px;
   bottom: 25px;
-  background-color: #e89300;
+  background-color: #fff;
   color: #000000;
   border: 1px solid black;
   width: 10px;
@@ -280,7 +290,7 @@ header nav {
   position: absolute;
   width: 300px;
   background-color: #000000;
-  color: white;
+  color: #3c2c7d;
   right: 5%;
   padding: 5px;
   border-radius: 5px;
@@ -306,7 +316,7 @@ header nav {
   display: flex;
   align-items: center;
   padding: 5px;
-  background-color: #e89300;
+  background-color: white;
   border-radius: 5px;
 }
 
@@ -324,7 +334,8 @@ header nav {
 }
 
 .hidden-card__clear-btn {
-  background-color: #e89300;
+  background-color: #3c2c7d;
+  color: #ffff;
   cursor: pointer;
   border: 1px solid #ffff;
   padding: 5px;
@@ -339,8 +350,8 @@ header nav {
 }
 
 .hidden-card__clear-btn:hover {
-  background-color: black;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #3c2c7d;
 }
 
 .hidden-card__amount {
@@ -358,7 +369,7 @@ header nav {
 }
 
 .pag-btn {
-  background-color: #e89300;
+  background-color: #fff;
   padding: 3px;
   cursor: pointer;
   border: 2px solid #ffffff;
@@ -367,13 +378,13 @@ header nav {
 
 .pag-btn:hover {
   background-color: #ffffff;
-  border: 2px solid #e89300;
+  border: 2px solid #fff;
 }
 
 footer {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #e89300;
+  background-color: #fff;
 }
 
 footer p {

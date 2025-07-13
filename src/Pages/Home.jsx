@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
-import { useFetch } from "../hooks/useFetch";
 import {
   Pagination,
   PaginationContent,
@@ -14,11 +13,36 @@ import { useTranslation } from "react-i18next";
 function Home() {
   const [page, setPage] = useState(1);
   const limit = 9;
+  const skip = (page - 1) * limit;
 
   const { t, i18n } = useTranslation();
-  const apiUrl = `http://localhost:3000/${i18n.language}?_page=${page}&_per_page=${limit}`;
-  console.log(apiUrl);
-  const { data, error, isPending } = useFetch(apiUrl);
+  const [data, setData] = useState([]);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
+  const apiUrl = `https://my-json-server.typicode.com/kadiroov/json-api/db`;
+
+  useEffect(() => {
+    setIsPending(true);
+    setError(null);
+
+    fetch(apiUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error("Ma'lumotni olishda xatolik yuz berdi");
+        return res.json();
+      })
+      .then((json) => {
+        const langData = json[i18n.language]; // ✅ kerakli tilni ajratib olish
+        if (!langData) throw new Error("Til bo'yicha ma'lumot topilmadi");
+        const paginatedData = langData.slice(skip, skip + limit); // ✅ pagination qo‘llash
+        setData(paginatedData);
+        setIsPending(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setIsPending(false);
+      });
+  }, [apiUrl, i18n.language, page]); // ❗ i18n.language ham dependencies ichida bo‘lishi kerak
 
   return (
     <section>

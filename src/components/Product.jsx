@@ -4,21 +4,20 @@ import { useTranslation } from "react-i18next";
 
 function Product({ product }) {
   const { dispatch, cart } = useGlobalContext();
-  const itemInCart = cart.find((item) => item.id == product.id);
-  const { t, i18n } = useTranslation();
-  // console.log(product)
+  const itemInCart = cart.find((item) => item.id === product.id);
+  const { t } = useTranslation();
+
   return (
     <div className="card">
       <div className="card__info">
         <h4 className="card__title">{product.name}</h4>
-        <p className="card_des">{product.description}</p>
-        <span className="card_category">{product.category}</span>
-        <small className="card__price">
-          {t("price-btn")}: ${product.price}
-        </small>
+        <p className="card__des">{product.description}</p>
+        <span className="card__category">{product.category}</span>
+        <span className="card__brand">{product.brand}</span>
+        <small className="card__price"> ${product.price}</small>
       </div>
 
-      {!itemInCart && (
+      {!itemInCart ? (
         <button
           onClick={() =>
             dispatch({
@@ -30,13 +29,11 @@ function Product({ product }) {
         >
           <FaShoppingCart className="icon" />
         </button>
-      )}
-
-      {itemInCart && (
+      ) : (
         <div className="card-action-btns">
           <button
             onClick={() => {
-              if (itemInCart.amount == 1) {
+              if (itemInCart.amount === 1) {
                 dispatch({ type: "DELETE", payload: product.id });
               } else {
                 dispatch({ type: "DECREASE", payload: product.id });
@@ -44,7 +41,7 @@ function Product({ product }) {
             }}
             className="btn card__btn__amount"
           >
-            &#8722;
+            −
           </button>
           <span className="amount">{itemInCart.amount}</span>
           <button
@@ -56,7 +53,7 @@ function Product({ product }) {
             }
             className="btn card__btn__amount"
           >
-            &#43;
+            +
           </button>
         </div>
       )}
